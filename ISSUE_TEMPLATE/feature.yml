@@ -1,0 +1,24 @@
+name: Feature / improvement
+description: New capability or improvement to an existing one.
+labels: ["type/feature"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What user/business problem does this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Done means
+      description: Concrete acceptance criteria.
+    validations:
+      required: true

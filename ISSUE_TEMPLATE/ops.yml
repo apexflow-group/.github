@@ -1,0 +1,15 @@
+name: Ops task
+description: Recurring or operational work (cost review, benchmark, refresh).
+labels: ["type/ops"]
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: Task
+    validations:
+      required: true
+  - type: textarea
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Steps; link the runbook in handbook/ if one exists.

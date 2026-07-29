@@ -1,0 +1,41 @@
+name: Bug report
+description: A defect. Follow the bug process — fix the class, not the instance.
+labels: ["type/bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What's wrong
+      description: Symptom + where seen (URL, command, log).
+    validations:
+      required: true
+  - type: textarea
+    id: blast-radius
+    attributes:
+      label: Blast radius
+      description: How widespread is this? Check counts/queries before fixing one instance.
+    validations:
+      required: true
+  - type: textarea
+    id: root-cause
+    attributes:
+      label: Root cause
+      description: Fill in during investigation.
+  - type: textarea
+    id: fix-class
+    attributes:
+      label: Fix the class
+      description: What fixes every instance (grounded-or-skip), not just the reported one?
+  - type: textarea
+    id: guardrail
+    attributes:
+      label: Guardrail
+      description: What gate/check prevents regression? (deploy gate, test, ratchet)
+  - type: checkboxes
+    id: done
+    attributes:
+      label: Done means
+      options:
+        - label: Class fixed, not just the instance
+        - label: Guardrail added
+        - label: Docs updated same session

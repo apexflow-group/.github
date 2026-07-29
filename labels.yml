@@ -1,0 +1,62 @@
+# Canonical ApexFlow label taxonomy (Playbook Appendix B).
+# Sync to every org repo when this file changes.
+- name: type/feature
+  color: "0E8A16"
+  description: New capability or improvement
+- name: type/bug
+  color: "D73A4A"
+  description: Defect — bug-process template applies
+- name: type/task
+  color: "BFD4F2"
+  description: Routine work item; no code change implied
+- name: type/ops
+  color: "5319E7"
+  description: Recurring or operational work
+- name: type/decision
+  color: "FBCA04"
+  description: Founder decision to make; closes into decisions/ log
+- name: type/research
+  color: "006B75"
+  description: Investigation / analysis; output is a doc
+- name: priority/p0
+  color: "B60205"
+  description: Drop everything
+- name: priority/p1
+  color: "D93F0B"
+  description: This iteration
+- name: priority/p2
+  color: "E99695"
+  description: Soon
+- name: priority/p3
+  color: "F9D0C4"
+  description: Someday
+- name: area/site
+  color: "1D76DB"
+  description: NBIO site
+- name: area/data
+  color: "0052CC"
+  description: Catalog / ETL / data quality
+- name: area/seo
+  color: "5DADE2"
+  description: SEO and search visibility
+- name: area/content
+  color: "76D7C4"
+  description: Content and enrichment
+- name: area/infra
+  color: "34495E"
+  description: AWS / deploy / tooling
+- name: area/legal
+  color: "6A737D"
+  description: Company legal
+- name: area/finance
+  color: "2E7D32"
+  description: Company finance
+- name: area/growth
+  color: "8E44AD"
+  description: Growth / partnerships / revenue
+- name: status/blocked
+  color: "000000"
+  description: Cannot proceed — blocker named in a comment
+- name: status/waiting-external
+  color: "C5DEF5"
+  description: Waiting on a third party
