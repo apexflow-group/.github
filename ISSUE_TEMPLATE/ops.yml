@@ -1,15 +1,49 @@
 name: Ops task
-description: Recurring or operational work (cost review, benchmark, refresh).
-labels: ["type/ops"]
+description: Recurring or operational work — reviews, refreshes, snapshots.
+title: "OPS: "
+labels: ["type/ops", "status/needs-triage"]
 body:
-  - type: textarea
-    id: task
+  - type: markdown
     attributes:
-      label: Task
+      value: |
+        **Title:** `OPS:` + what recurs, with the cycle if it is fixed —
+        `OPS: AWS cost review — August 2026`. ≤ 80 chars.
+
+        **Before you submit:** add `priority/*`, `area/*`, `topic/*`, `size/*`,
+        then remove `status/needs-triage`.
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: What goes wrong if this cycle is skipped.
+    validations:
+      required: true
+  - type: input
+    id: cadence
+    attributes:
+      label: Cadence
+      description: Monthly / weekly / on the 3rd / per deploy. Say when the next one is due.
     validations:
       required: true
   - type: textarea
     id: checklist
     attributes:
       label: Checklist
-      description: Steps; link the runbook in handbook/ if one exists.
+      description: The steps. Link the runbook in the handbook if one exists.
+    validations:
+      required: true
+  - type: textarea
+    id: done-means
+    attributes:
+      label: Done means
+      description: What "this cycle is complete" looks like — the artefact it leaves behind.
+    validations:
+      required: true
+  - type: input
+    id: blocked-by
+    attributes:
+      label: Blocked by
+      description: "`#12`, `apexflow-group/nbio-site#7`, or `none`. If any are open, add status/blocked."
+      placeholder: none
+    validations:
+      required: true

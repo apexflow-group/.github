@@ -1,24 +1,66 @@
 name: Feature / improvement
-description: New capability or improvement to an existing one.
-labels: ["type/feature"]
+description: New capability, or an improvement to an existing one.
+title: "FEATURE: "
+labels: ["type/feature", "status/needs-triage"]
 body:
-  - type: textarea
-    id: problem
+  - type: markdown
     attributes:
-      label: Problem
-      description: What user/business problem does this solve?
+      value: |
+        **Title:** `FEATURE:` unless a more specific prefix from the ladder in
+        TASK_PROCESS.md §2 applies (`UI:` if a reader sees it, `SEO:` if search
+        visibility is the outcome, `DATA:`, `GROWTH:` …). ≤ 80 chars.
+
+        **Reader-visible?** Add `topic/ux` — the rollout is then governed by
+        `nbio-data/docs/UI_CHANGE_PROCESS.md`: one example page, then explicit
+        owner approval. Silence is not approval.
+
+        **Before you submit:** add `priority/*`, `area/*`, `topic/*`, `size/*`,
+        then remove `status/needs-triage`.
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: >
+        The reader or business outcome. What does its absence cost us? If the
+        answer is money, say roughly how much and how you got there.
     validations:
       required: true
   - type: textarea
     id: proposal
     attributes:
       label: Proposal
+      description: What gets built, in enough detail that a cold session could start.
     validations:
       required: true
   - type: textarea
-    id: acceptance
+    id: done-means
     attributes:
       label: Done means
-      description: Concrete acceptance criteria.
+      description: >
+        Concrete acceptance criteria. More than ~5 checkboxes means this should
+        be split (TASK_PROCESS.md §5).
     validations:
       required: true
+  - type: textarea
+    id: how-well-know
+    attributes:
+      label: How we'll know
+      description: The metric, where it is measured, and today's baseline with a date.
+  - type: input
+    id: blocked-by
+    attributes:
+      label: Blocked by
+      description: "`#12`, `apexflow-group/nbio-site#7`, or `none`. If any are open, add status/blocked."
+      placeholder: none
+    validations:
+      required: true
+  - type: input
+    id: blocks
+    attributes:
+      label: Blocks
+      placeholder: "#34"
+  - type: input
+    id: legacy-ref
+    attributes:
+      label: Legacy ref
+      placeholder: "T13"

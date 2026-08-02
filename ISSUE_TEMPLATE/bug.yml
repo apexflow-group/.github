@@ -1,41 +1,91 @@
 name: Bug report
-description: A defect. Follow the bug process — fix the class, not the instance.
-labels: ["type/bug"]
+description: A defect. The unit of work is the CLASS, never the reported instance.
+title: "BUG: "
+labels: ["type/bug", "status/needs-triage"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        **Title:** `BUG:` + the symptom, with the count if you have it —
+        `BUG: 555 book pages show "synopsis coming soon" while cached copy sits unused`.
+        ≤ 80 chars. A bug keeps the `BUG:` prefix even when it lives in SEO or
+        the UI: how it gets fixed matters more than where it lives.
+
+        **The fix is governed by `nbio-data/docs/BUG_PROCESS.md`** — reproduce,
+        root-cause, quantify the blast radius, fix the class grounded-or-skip,
+        add a guardrail, document the same session. A reported page is never
+        the bug; it is one instance of a class.
+
+        **Before you submit:** add `priority/*`, `area/*`, `topic/*`, `size/*`,
+        then remove `status/needs-triage`.
   - type: textarea
-    id: what
+    id: why
+    attributes:
+      label: Why
+      description: >
+        What the defect costs — wrong pages served, revenue lost, a claim we are
+        making that is not true. Not "it's broken"; what broken costs.
+    validations:
+      required: true
+  - type: textarea
+    id: symptom
     attributes:
       label: What's wrong
-      description: Symptom + where seen (URL, command, log).
+      description: Symptom plus where it was seen — URL, command, log, query.
     validations:
       required: true
   - type: textarea
     id: blast-radius
     attributes:
       label: Blast radius
-      description: How widespread is this? Check counts/queries before fixing one instance.
+      description: >
+        How many rows/pages/series match the CLASS, with the query that counted
+        them and the date. Sanity-check against known-good flagships. Fill in
+        "not yet measured" only if you are opening this and stopping.
     validations:
       required: true
   - type: textarea
     id: root-cause
     attributes:
       label: Root cause
-      description: Fill in during investigation.
+      description: One sentence. If you cannot write it, you have not found it yet.
   - type: textarea
     id: fix-class
     attributes:
       label: Fix the class
-      description: What fixes every instance (grounded-or-skip), not just the reported one?
+      description: >
+        What fixes every instance. Grounded-or-skip — repair only where a
+        trustworthy source proves the value; elsewhere change the DISPLAY to
+        stop making the false claim. Never guess.
   - type: textarea
     id: guardrail
     attributes:
       label: Guardrail
-      description: What gate/check prevents regression? (deploy gate, test, ratchet)
-  - type: checkboxes
-    id: done
+      description: >
+        The gate check / ratchet / test that makes this class unshippable
+        forever. Mandatory, same session as the fix.
+  - type: textarea
+    id: done-means
     attributes:
       label: Done means
-      options:
-        - label: Class fixed, not just the instance
-        - label: Guardrail added
-        - label: Docs updated same session
+      description: Concrete acceptance criteria.
+      value: |
+        - [ ] Class fixed catalogue-wide, not just the reported instance
+        - [ ] Guardrail added to the deploy gate and green
+        - [ ] Controls verified — known-good cases kept their behaviour
+        - [ ] Docs updated in the same session
+    validations:
+      required: true
+  - type: input
+    id: blocked-by
+    attributes:
+      label: Blocked by
+      description: "`#12`, `apexflow-group/nbio-site#7`, or `none`. If any are open, add status/blocked."
+      placeholder: none
+    validations:
+      required: true
+  - type: input
+    id: blocks
+    attributes:
+      label: Blocks
+      placeholder: "#34"

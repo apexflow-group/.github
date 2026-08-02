@@ -1,22 +1,59 @@
 name: Decision
-description: A founder decision to make. Closing this = decision recorded in company/decisions/.
-labels: ["type/decision"]
+description: A founder decision to make. Closing it = a dated record in company/decisions/.
+title: "DECISION: "
+labels: ["type/decision", "status/needs-triage"]
 body:
-  - type: textarea
-    id: context
+  - type: markdown
     attributes:
-      label: Context
-      description: Why does this need deciding now?
+      value: |
+        **Title:** `DECISION:` + what is being decided, phrased so the answer is
+        a choice — `DECISION: remit-rates sites — company or personal?`
+        ≤ 80 chars.
+
+        **A decision blocks the work that waits on it.** Name those issues under
+        Blocks; work waiting on an unmade decision is not `p1`, whatever it says.
+
+        **Before you submit:** add `priority/*`, `area/*`, `topic/*`, `size/*`,
+        then remove `status/needs-triage`.
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: Why does this need deciding now? What is stalled until it is decided?
     validations:
       required: true
   - type: textarea
     id: options
     attributes:
       label: Options considered
+      description: Each option with its cost, its risk, and what it forecloses.
+    validations:
+      required: true
+  - type: textarea
+    id: done-means
+    attributes:
+      label: Done means
+      value: |
+        - [ ] Decision recorded below
+        - [ ] Dated entry landed in `apexflow/company/decisions/`
+        - [ ] `status/blocked` cleared from every issue this was blocking
     validations:
       required: true
   - type: textarea
     id: outcome
     attributes:
       label: Decision
-      description: Fill in when decided; copy into company/decisions/ before closing.
+      description: Filled in when decided. Copy into company/decisions/ before closing.
+  - type: input
+    id: blocked-by
+    attributes:
+      label: Blocked by
+      placeholder: none
+    validations:
+      required: true
+  - type: input
+    id: blocks
+    attributes:
+      label: Blocks
+      description: Issues that cannot proceed until this is decided.
+      placeholder: "#34"

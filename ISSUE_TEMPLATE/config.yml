@@ -1,1 +1,17 @@
-blank_issues_enabled: true
+# Blank issues are OFF: every issue starts from a form so the contract fields
+# (Why / Done means / Blocked by) and the type/* label are there from birth.
+# The seven forms cover every type in the taxonomy.
+#
+# Note this only binds the web UI. `gh issue create --body ...` bypasses forms
+# entirely, which is why task_lint.py is the real enforcement — see
+# apexflow/handbook/TASK_PROCESS.md §8.
+blank_issues_enabled: false
+contact_links:
+  - name: How we write tasks (read before opening one)
+    url: https://github.com/apexflow-group/handbook/blob/main/TASK_PROCESS.md
+    about: >
+      Title prefixes, the six label dimensions, the issue contract, splitting
+      and dependencies. An issue that does not follow it is not schedulable.
+  - name: How we fix bugs
+    url: https://github.com/apexflow-group/nbio-data/blob/main/docs/BUG_PROCESS.md
+    about: Fix the class, never the reported instance. Blast radius, root cause, guardrail.

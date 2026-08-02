@@ -1,0 +1,56 @@
+name: Epic
+description: Parent tracking issue. Owns sub-issues; never implemented directly.
+title: "EPIC: "
+labels: ["type/epic", "size/xl", "status/needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **An epic is a container, not work.** It closes when its children do.
+        `size/xl` is legitimate here and only here.
+
+        **Children must be independently shippable and independently valuable** —
+        slices through the stack, not layers of it. "ship it for UK" / "ship it
+        for Canada" is two good children; "build the schema" / "build the ETL" /
+        "build the page" is one issue with extra ceremony (TASK_PROCESS.md §5).
+
+        **Attach children as GitHub sub-issues**, not a checklist of links —
+        a checklist is not queryable:
+
+        ```
+        gh api repos/apexflow-group/<repo>/issues/<parent>/sub_issues \
+          -f sub_issue_id=<child_issue_id>
+        ```
+
+        **Before you submit:** add `priority/*`, `area/*`, `topic/*`, then
+        remove `status/needs-triage`.
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: The outcome the whole epic buys, and roughly what it is worth.
+    validations:
+      required: true
+  - type: textarea
+    id: done-means
+    attributes:
+      label: Done means
+      description: >
+        The end state, plus the child issues in the order they run. Every child
+        gets a sub-issue link once created.
+    validations:
+      required: true
+  - type: textarea
+    id: how-well-know
+    attributes:
+      label: How we'll know
+      description: The metric this epic moves, where it is measured, and today's baseline with a date.
+    validations:
+      required: true
+  - type: input
+    id: blocked-by
+    attributes:
+      label: Blocked by
+      placeholder: none
+    validations:
+      required: true

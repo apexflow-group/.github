@@ -1,0 +1,62 @@
+name: Research / investigation
+description: The deliverable is an answer in a doc, not a code change.
+title: "RESEARCH: "
+labels: ["type/research", "status/needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Title:** `RESEARCH:` + the question. A trailing `?` is fine here.
+        ≤ 80 chars.
+
+        **Research does not build.** If this issue also contains the build,
+        split it: the research issue **blocks** a separate `FEATURE:`/`TASK:`.
+        Otherwise the investigation expands to fill the issue and nothing ships
+        (TASK_PROCESS.md §5.4).
+
+        **Before you submit:** add `priority/*`, `area/*`, `topic/*`, `size/*`,
+        then remove `status/needs-triage`.
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: What decision or work is waiting on this answer.
+    validations:
+      required: true
+  - type: input
+    id: question
+    attributes:
+      label: The question
+      description: One sentence, answerable. Not a topic — a question.
+    validations:
+      required: true
+  - type: input
+    id: deliverable
+    attributes:
+      label: Deliverable doc
+      description: The path the answer lands in, e.g. `nbio-data/docs/SEO_INDEXING_ANALYSIS.md`.
+    validations:
+      required: true
+  - type: textarea
+    id: done-means
+    attributes:
+      label: Done means
+      description: >
+        The doc exists, answers the question with dated numbers and re-runnable
+        sources, and names the follow-up issues it spawned.
+    validations:
+      required: true
+  - type: input
+    id: blocked-by
+    attributes:
+      label: Blocked by
+      description: "`#12`, `apexflow-group/nbio-site#7`, or `none`. If any are open, add status/blocked."
+      placeholder: none
+    validations:
+      required: true
+  - type: input
+    id: blocks
+    attributes:
+      label: Blocks
+      description: The build issues that cannot start until this answers.
+      placeholder: "#34"

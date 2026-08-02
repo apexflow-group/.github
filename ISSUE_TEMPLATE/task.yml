@@ -1,0 +1,59 @@
+name: Task
+description: Bounded work with a known method. No new capability.
+title: "TASK: "
+labels: ["type/task", "status/needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Title:** replace `TASK:` with the right prefix from the ladder in
+        TASK_PROCESS.md §2 — `SEO:` `UI:` `DATA:` `INFRA:` `CONTENT:` `GROWTH:`
+        `DOCS:` `SECURITY:` `LEGAL:` `FINANCE:` — then a human-readable clause
+        saying **what changes**, ≤ 80 chars total.
+
+        **Before you submit:** add the remaining label dimensions —
+        `priority/*`, `area/*`, `topic/*`, `size/*` — then remove
+        `status/needs-triage`. An issue is not schedulable until all six
+        dimensions are set.
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: What it costs us that this is not true today. One or two sentences.
+    validations:
+      required: true
+  - type: textarea
+    id: done-means
+    attributes:
+      label: Done means
+      description: >
+        Concrete, checkable acceptance criteria. Someone who was not in the
+        room can tell whether it is satisfied, without asking.
+    validations:
+      required: true
+  - type: textarea
+    id: how-well-know
+    attributes:
+      label: How we'll know
+      description: >
+        The metric, where it is measured, and today's baseline with a date.
+        Required if this issue claims a number or promises an improvement.
+  - type: input
+    id: blocked-by
+    attributes:
+      label: Blocked by
+      description: "`#12`, `apexflow-group/nbio-site#7`, or `none`. If any are open, add status/blocked."
+      placeholder: none
+    validations:
+      required: true
+  - type: input
+    id: blocks
+    attributes:
+      label: Blocks
+      placeholder: "#34"
+  - type: input
+    id: legacy-ref
+    attributes:
+      label: Legacy ref
+      description: Internal plan code, if this came from a plan doc. Never put it in the title.
+      placeholder: "T13"

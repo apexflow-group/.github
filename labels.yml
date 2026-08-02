@@ -1,50 +1,80 @@
-# Canonical ApexFlow label taxonomy (Playbook Appendix B).
-# Sync to every org repo when this file changes.
-- name: type/feature
-  color: "0E8A16"
-  description: New capability or improvement
+# Canonical ApexFlow label taxonomy.
+#
+# Governed by  ~/workspace/apexflow/handbook/TASK_PROCESS.md  (§3 Labelling).
+# This file is the SINGLE SOURCE. Never create a label in the GitHub UI and
+# never invent a repo-local label -- add it here, then run:
+#
+#     bash ~/workspace/apexflow/.github/sync_labels.sh
+#
+# Six dimensions. An issue answers each one independently:
+#
+#   type/*      WHAT KIND of work it is           exactly 1   required
+#   priority/*  WHEN it gets done                 exactly 1   required
+#   area/*      WHICH PART of the system it hits  1 or more   required
+#   topic/*     WHAT IT IS ABOUT (cross-product)  1 or more   required
+#   size/*      HOW BIG it is                     exactly 1   required
+#   status/*    WHY it is not moving              0 or 1      optional
+#
+# GitHub's own default labels are kept only where they add a dimension we do
+# not already have (disposition at close time): duplicate, wontfix, invalid.
+# The rest of GitHub's defaults (bug, enhancement, documentation,
+# good first issue, help wanted, question) are RETIRED -- they duplicate
+# type/* and topic/docs, and a split taxonomy means board filters silently
+# miss issues. See TASK_PROCESS.md §3.6.
+
+# ---------------------------------------------------------------- type (1)
 - name: type/bug
   color: "D73A4A"
-  description: Defect — bug-process template applies
+  description: "Defect. BUG_PROCESS applies: fix the class, never the instance"
+- name: type/feature
+  color: "0E8A16"
+  description: New capability or improvement to an existing one
 - name: type/task
   color: "BFD4F2"
-  description: Routine work item; no code change implied
+  description: Bounded work with a known method; no new capability
 - name: type/ops
   color: "5319E7"
-  description: Recurring or operational work
+  description: Recurring or operational work (reviews, refreshes, snapshots)
 - name: type/decision
   color: "FBCA04"
-  description: Founder decision to make; closes into decisions/ log
+  description: Founder decision to make; closes into company/decisions/
 - name: type/research
   color: "006B75"
-  description: Investigation / analysis; output is a doc
+  description: Investigation whose deliverable is a doc, not a code change
+- name: type/epic
+  color: "3E4B9E"
+  description: Parent tracking issue; owns sub-issues, never implemented directly
+
+# ------------------------------------------------------------ priority (1)
 - name: priority/p0
   color: "B60205"
-  description: Drop everything
+  description: Drop everything - revenue, data loss, legal, or site down
 - name: priority/p1
   color: "D93F0B"
   description: This iteration
 - name: priority/p2
   color: "E99695"
-  description: Soon
+  description: Soon - next iteration or two
 - name: priority/p3
   color: "F9D0C4"
-  description: Someday
+  description: Someday - real but unscheduled
+
+# ------------------------------------------------------------- area (1..n)
 - name: area/site
   color: "1D76DB"
-  description: NBIO site
+  description: The rendered site - templates, build, deploy target
 - name: area/data
   color: "0052CC"
-  description: Catalog / ETL / data quality
+  description: Catalog / ETL / data quality (bm2 and its sources)
 - name: area/seo
   color: "5DADE2"
   description: SEO and search visibility
 - name: area/content
   color: "76D7C4"
-  description: Content and enrichment
+  description: Content and enrichment - prose a reader reads
 - name: area/infra
   color: "34495E"
-  description: AWS / deploy / tooling
+  description: AWS / deploy / tooling / CI
 - name: area/legal
   color: "6A737D"
   description: Company legal
@@ -54,9 +84,131 @@
 - name: area/growth
   color: "8E44AD"
   description: Growth / partnerships / revenue
+
+# ------------------------------------------------------------ topic (1..n)
+# Cross-product subject tags. Deliberately NOT product-specific, so the same
+# tag works on NBIO, crawlkit, amazonkit and any future property.
+- name: topic/ads
+  color: "F7C6C7"
+  description: Display advertising - AdSense, Mediavine, ads.txt, consent/CMP
+- name: topic/affiliate
+  color: "FAD8C7"
+  description: Affiliate revenue - tracking IDs, bounties, retailer mix, payouts
+- name: topic/amazon-links
+  color: "FFD8A8"
+  description: Amazon link correctness - /dp/ verdicts, ASIN resolution, degradation
+- name: topic/analytics
+  color: "C2E0C6"
+  description: Measurement - GA4, GSC, Bing Webmaster, KPI definitions
+- name: topic/automation
+  color: "D4C5F9"
+  description: Scheduled jobs, workflows, recurring-issue generation
+- name: topic/compliance
+  color: "E4B7B7"
+  description: Third-party terms, licences, policy boundaries, data-use limits
+- name: topic/coverage
+  color: "BFE5BF"
+  description: Catalogue breadth - how much of the real world we hold
+- name: topic/cost
+  color: "C7E8CA"
+  description: AWS and vendor spend
+- name: topic/dedup
+  color: "D8CCE8"
+  description: Duplicates, merges, reconciliation, conflicting records
+- name: topic/docs
+  color: "CFD3D7"
+  description: Documentation - the deliverable is a doc change
+- name: topic/email
+  color: "F9D6E8"
+  description: Email capture, notification loops, deliverability
+- name: topic/enrichment
+  color: "B7E1D3"
+  description: Generated or backfilled content; the LLM pipelines
+- name: topic/experiment
+  color: "FFF1A8"
+  description: A/B or holdout test with a REVIEW-DUE date and a stated metric
+- name: topic/genai
+  color: "C5D9F1"
+  description: AI-assistant discoverability - llms.txt, extractability, answer engines
+- name: topic/indexing
+  color: "AEDFF7"
+  description: What search engines hold - sitemap, robots, noindex, IndexNow
+- name: topic/ingestion
+  color: "A8D5E8"
+  description: Pulling data in from an external source (OL, WD, PRH, TPL, publishers)
+- name: topic/partnerships
+  color: "E0C3F0"
+  description: Publishers, outreach, backlinks, third-party relationships
+- name: topic/performance
+  color: "D0E8C0"
+  description: Page speed, Core Web Vitals, build and pipeline runtime
+- name: topic/quality
+  color: "F4C7A1"
+  description: Correctness of what we publish - gates, ratchets, audits, accuracy
+- name: topic/regional
+  color: "B8D4E8"
+  description: Non-US readers - marketplaces, territories, regional editions
+- name: topic/schema
+  color: "CBE3B0"
+  description: Structured data - JSON-LD, rich results, SERP features
+- name: topic/search
+  color: "B3D9D9"
+  description: On-site search
+- name: topic/security
+  color: "E8B4B8"
+  description: Secrets, access control, 2FA, abuse and bot protection
+- name: topic/social
+  color: "F5C6E0"
+  description: Social channels - Pinterest, BookTok, distribution off-site
+- name: topic/testing
+  color: "D6E0A8"
+  description: Gate checks, guardrails, tests, ratchets
+- name: topic/ux
+  color: "F0C8E0"
+  description: What a reader sees - UI_CHANGE_PROCESS applies
+
+# --------------------------------------------------------------- size (1)
+# Sized in SESSIONS, not hours - a session is one cold Claude context.
+- name: size/s
+  color: "EDEDED"
+  description: Half a session - one file or one query, no deploy
+- name: size/m
+  color: "D9D9D9"
+  description: One session, single repo, may include a deploy
+- name: size/l
+  color: "BDBDBD"
+  description: Two to three sessions, or crosses repos - needs a written plan
+- name: size/xl
+  color: "8C8C8C"
+  description: "Not estimable / >3 sessions - INVALID on an open issue: split it"
+
+# ------------------------------------------------------------ status (0..1)
 - name: status/blocked
   color: "000000"
-  description: Cannot proceed — blocker named in a comment
+  description: Blocked by another issue - named in the Blocked by line
 - name: status/waiting-external
   color: "C5DEF5"
-  description: Waiting on a third party
+  description: Waiting on a third party we do not control
+- name: status/needs-triage
+  color: "FEF2C0"
+  description: Created but not yet conformed to TASK_PROCESS - do not schedule
+- name: status/needs-approval
+  color: "FBE9A7"
+  description: Work is ready; waiting on explicit owner approval to proceed
+
+# ------------------------------- GitHub defaults kept (disposition at close)
+- name: duplicate
+  color: "CFD3D7"
+  description: Duplicate - the surviving issue is named in a closing comment
+- name: wontfix
+  color: "FFFFFF"
+  description: Deliberately not doing this; the reason is in a closing comment
+- name: invalid
+  color: "E4E669"
+  description: Not reproducible, or the premise turned out to be wrong
+
+# --------------------------------------------------------------- RETIRED
+# Deleted by sync_labels.sh. Listed here so the decision is not re-litigated.
+#   bug, enhancement, documentation  -> duplicate type/* and topic/docs
+#   good first issue, help wanted    -> no external contributors (private, 2 owners)
+#   question                         -> use a comment, not a label
